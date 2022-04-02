@@ -31,7 +31,12 @@ export default class Login extends Component {
           headers: {
             'Accept': '*/*',
             'Content-Type': 'application/json'
-          }
+          },
+          //this will nees a body vs doing all the user login via the url parameters. I can change the login endpoint to look at the url params instread but I have it set up as having a body 
+          // something like this
+          body: {
+          email:this.state.email,
+          password: this.state.password
         }
       ).then((response) => response.text()).then((responseData) => {
         if (!!responseData) {
