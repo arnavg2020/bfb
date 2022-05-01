@@ -1,102 +1,97 @@
 // components/dashboard.js
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TextInput, Button, Picker, Linking, Alert } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Button, Picker, Image, Linking, Alert, ImageBackground, ActivityIndicator } from 'react-native';
 import('@react-navigation/native').Route;
 
 
 export default class Profile extends Component {
-  constructor()  {
-    console.log(route.params);
+  constructor() {
     super();
+    this.state = {
+      email: '',
+      isLoading: false
+    }
   }
-  updateInputVal = (val, prop) => {
-    const state = this.state;
-    state[prop] = val;
-    this.setState(state);
-  }
-  goToInputPage = () => {
-    this.props.navigation.navigate('Input', {
-      user: route.params.user
-    });
-  }  
-  goToPledgePage = () => {
-    this.props.navigation.navigate('Pledge', {
-      user: route.params.user
-    });
-  }  
 
-  updateEmailAddress = () => {
-    if (this.state.username == '') {
-        Alert.alert('Please enter a new email address')
-    } else {
-      this.setState({
-        isLoading: true,
-      });
-      fetch(`https://birdies-for-books.herokuapp.com/users/update-user/${encodeURIComponent(route.params.user.user_id)}`, 
-        {
-          method: 'PATCH',
-          headers: {
-            'Accept': '*/*',
-            'Content-Type': 'application/json; charset=utf-8',
-            'Connection': 'keep-alive',
-          },
-          body: {
-            name: route.params.displayName,
-            email: this.state.email,
-            phone_number: route.params.phoneNumber,
-            password: route.params.password,
-            pledge_score: route.params.pledgeType,
-            pledge_amount: route.params.pledgeAmount,
-            score_amount: route.params.score_amount,
-            outstanding_balance: route.params.outstanding_balance,
-            amount_paid_to_date: route.params.amount_paid_to_date
-          }
-        }
-      ).then((response) => response.json()).then((json) => {
-        route.params.user.email = this.state.email;
-        console.log(json);
-        Alert.alert('Successfully updated email address!')
-        this.setState({
-          isLoading: false,
-        });
-      }).catch((error) => {
-        Alert.alert(error.Message);
-        this.setState({
-          isLoading: false,
-        });
+  render() {
+
+    const goToInputPage = () => {
+      this.props.navigation.navigate('Input', {
+        user: this.props.route.params.user
       });
     }
-  } 
-  render() {
+    const goToPledgePage = () => {
+      this.props.navigation.navigate('Pledge', {
+        user: this.props.route.params.user
+      });
+    }
+
+    const goToEditProfile = () => {
+      this.props.navigation.navigate('Edit', {
+        user: this.props.route.params.user
+      });
+    }
+
+    const goToInfoPage = () => {
+      Linking.openURL('http://reachoutandreadco.org/birdies-for-books');
+    }
+
+    if (this.state.isLoading) {
+      return (
+        <View style={styles.preloader}>
+          <ActivityIndicator size="large" color="#9E9E9E" />
+        </View>
+      )
+    }
     return (
       <View style={styles.container}>
-        <Text style = {styles.textStyle}>
-          Want to update your email address?
-        </Text>
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="email"
-          value={this.state.email}
-          onChangeText={(val) => this.updateInputVal(val, 'email')}
-        />
-        <Button
-          color="white"
-          title="Update Email Address"
-          onPress={() => this.updateEmailAddress()}
-        />
-        <Text style = {styles.textStyle}>
-          To edit your pledge amount or type, click the button below
-        </Text>
-        <Button
-          color="white"
-          title="Edit Pledge Type/Amount"
-          onPress={() => this.goToPledgePage()}
-        />
-        <Button
-          color="white"
-          title="Return to Input Page"
-          onPress={() => this.goToInputPage()}
-        />
+        <ImageBackground source={require('bfb/assets/Golf-green-bkgd-01.png')} resizeMode="cover" style={styles.image}>
+          <View style={styles.shadow}>
+            <Text style={styles.headerText}>
+              Thanks for playing, {this.props.route.params.user.name}!
+            </Text>
+            <Button
+              color="#054758"
+              title="LEARN ABOUT YOUR PLEDGE'S IMPACT >"
+              onPress={() => goToInfoPage()}
+            />
+            <Text style={styles.buttonStyleTwo}></Text>
+            <Text style={styles.textStyle}>
+              <Text style={styles.textStyleTwo}>Email | </Text>{this.props.route.params.user.email}
+            </Text>
+            <Text style={styles.textStyle}>
+              <Text style={styles.textStyleTwo}>Pledge Type | </Text>{this.props.route.params.user.pledge_score}s
+            </Text>
+            <Text style={styles.textStyle}>
+              <Text style={styles.textStyleTwo}>Pledge Amount | </Text>${this.props.route.params.user.pledge_amount}.00
+            </Text>
+            <Text style={[styles.textStyle, styles.bottomText]}>
+              <Text style={styles.textStyleTwo}>Total {this.props.route.params.user.pledge_score}s This Season | </Text>{this.props.route.params.user.score_amount}
+            </Text>
+            <Button
+              color="#054758"
+              title="Record My Activity"
+              onPress={() => goToInputPage()}
+            />
+            
+            <Text style = {styles.buttonStyle}>
+          </Text>
+            <Button
+              color="white"
+              title="Edit My Profile"
+              onPress={() => goToEditProfile()}
+            />
+            <Button
+              color="white"
+              title="Edit My Pledge Information"
+              onPress={() => goToPledgePage()}
+            />
+          </View>
+          <Image
+            style={styles.capTechBanner}
+            source={require('bfb/assets/bottomlogobg.png')}
+          />
+        </ImageBackground>
       </View>
     );
   }
@@ -105,28 +100,89 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: "flex",
-    justifyContent: 'center',
+    flexDirection: "column",
+    justifyContent: "center"
+  },
+  buttonStyle: {
+    marginTop: '6%'
+  },
+  buttonStyleTwo: {
+    marginBottom: '3%'
+  },
+  bottomText: {
+    marginBottom: '8%'
+  },
+  headerText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+    marginBottom: '10%',
+    width: '90%',
+    marginLeft: '5%',
+    marginTop: '60%'
+  },
+  preloader: {
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    position: 'absolute',
     alignItems: 'center',
-    padding: 35,
-    backgroundColor: '#c2282d'
+    justifyContent: 'center',
+    backgroundColor: 'black'
   },
   textStyle: {
-    fontSize: 15,
+    fontSize: 18,
     marginBottom: 15,
-    color: 'white'
+    color: 'white',
+    textAlign: 'center',
+    width: '90%',
+    marginLeft: '5%'
+  },
+  textStyleTwo: {
+    fontSize: 18,
+    marginBottom: 15,
+    color: 'white',
+    textAlign: 'center',
+    width: '90%',
+    marginLeft: '5%',
+    textTransform: 'uppercase',
+    fontWeight: 'bold'
   },
   inputStyle: {
-    fontSize: 20,
-    marginBottom: 50,
-    height: 50,
-    width: 150,
-    textAlign: 'center',
-    color: 'white'
+    width: '70%',
+    marginLeft: '15%',
+    marginRight: '15%',
+    marginBottom: 15,
+    paddingBottom: 15,
+    paddingTop: 15,
+    alignSelf: "center",
+    borderRadius: 10,
+    color: 'black',
+    backgroundColor: 'rgba(255, 255, 255, 0.6)',
+    textAlign: 'center'
   },
   pickerStyle: {
     height: 30,
     width: 150,
     marginBottom: 200,
     color: 'white'
-  }
+  },
+  image: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  shadow: {
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    height: '100%'
+  },
+  capTechBanner: {
+    height: 150,
+    resizeMode: 'contain',
+    width: '100%',
+    marginTop: '0%',
+    marginBottom: '24%',
+    backgroundColor: 'rgba(0,0,0,0.3)'
+  },
 });
