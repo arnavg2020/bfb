@@ -52,7 +52,8 @@ export default class Input extends Component {
               pledge_amount: this.props.route.params.user.pledge_amount,
               score_amount: (parseInt(parseInt(this.props.route.params.user.score_amount) + parseInt(this.state.scores))),
               outstanding_balance: (parseInt(parseInt(this.props.route.params.user.outstanding_balance) + (parseInt(this.state.scores) * parseInt(this.props.route.params.user.pledge_amount)))),
-              amount_paid_to_date: this.props.route.params.user.amount_paid_to_date
+              amount_paid_to_date: this.props.route.params.user.amount_paid_to_date,
+              total_pledged: this.route.params.user.total_pledged
             })
           }
         ).then((response) => response.json()).then((json) => {
@@ -94,8 +95,9 @@ export default class Input extends Component {
                         pledge_score: this.props.route.params.user.pledge_type,
                         pledge_amount: this.props.route.params.user.pledge_amount,
                         score_amount: this.props.route.params.user.score_amount,
-                        outstanding_balance: '0',
-                        amount_paid_to_date: parseInt(parseInt(this.props.route.params.user.outstanding_balance) + parseInt(this.props.route.params.user.amount_paid_to_date))
+                        outstanding_balance: 0,
+                        amount_paid_to_date: parseInt(parseInt(this.props.route.params.user.outstanding_balance) + parseInt(this.props.route.params.user.amount_paid_to_date)),
+                        total_pledged: this.route.params.user.total_pledged
                       })
                     }
                   ).then((response) => response.json()).then((json) => {

@@ -40,15 +40,16 @@ export default class Signup extends Component {
               'Connection': 'keep-alive',
             },
             body: JSON.stringify({
-              amount_paid_to_date: '0',
+              amount_paid_to_date: 0,
               email: this.state.email.toLowerCase(),
               name: this.state.displayName.toString(),
-              outstanding_balance: '0',
+              outstanding_balance: 0,
               password: this.state.password,
               phone_number: this.state.phoneNumber.toString(),
-              pledge_amount: '0',
+              pledge_amount: 0,
               pledge_score: "",
-              score_amount: '0'
+              score_amount: 0,
+              total_pledged: 0
             })
           }
         ).then((response) => response.json()).then((responseData) => {
