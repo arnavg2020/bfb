@@ -6,6 +6,7 @@ import Signup from './components/signup';
 import Pledge from './components/pledge';
 import Profile from './components/profile';
 import Input from './components/input';
+import Edit from './components/edit';
 import Leaderboard from './components/leaderboard';
 
 const Stack = createStackNavigator();
@@ -36,6 +37,11 @@ function MyStack() {
         name="Profile" 
         component={Profile} 
         options={{ title: 'Profile', headerLeft: null }}
+      />
+      <Stack.Screen 
+        name="Edit" 
+        component={Edit} 
+        options={{ title: 'Edit', headerLeft: null }}
       />
       <Stack.Screen 
         name="Input" 
