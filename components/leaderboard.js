@@ -12,7 +12,7 @@ export default class Leaderboard extends Component {
     super();
     this.state = {
       isLoading: true,
-      tableHeaders: ['Name', 'Pledge Type', 'Total'],
+      tableHeaders: ['NAME', 'PLEDGE TYPE', 'TOTAL'],
       scores: [],
       hasRendered: false,
       currentIndex: 0,
