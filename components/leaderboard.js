@@ -69,7 +69,7 @@ export default class Leaderboard extends Component {
     viewNextTen = () => {
       if (this.state.scores.length > (this.state.currentIndex + 5)) {
         this.setState({
-          currentIndex: currentIndex + 5
+          currentIndex: this.state.currentIndex + 5
         });
       }
     }
@@ -77,7 +77,7 @@ export default class Leaderboard extends Component {
     viewLastTen = () => {
       if (this.state.currentIndex > 0) {
         this.setState({
-          currentIndex: currentIndex - 5
+          currentIndex: this.state.currentIndex - 5
         });
       }
     }
@@ -141,7 +141,7 @@ export default class Leaderboard extends Component {
             </Text>
             <Table style={styles.borderTop}>
               <Row data={this.state.tableHeaders} style={styles.HeadStyle} textStyle={styles.HeadText} />
-              <Rows data={this.state.scores.length > 5 ? this.state.scores.slice(this.state.currentIndex, (this.state.scores.length > this.state.currentIndex + 5 ? this.state.currentIndex + 5 : this.state.scores[this.state.scores.length - 1])) : this.state.scores} textStyle={styles.TableText} style={styles.rowStyle} />
+              <Rows data={this.state.scores.length > 5 ? this.state.scores.slice(this.state.currentIndex, (this.state.scores.length > this.state.currentIndex + 5 ? this.state.currentIndex + 5 : this.state.scores[this.state.scores.length])) : this.state.scores} textStyle={styles.TableText} style={styles.rowStyle} />
             </Table>
             <Text style={styles.textButtonStyle}>
               <Text onPress={() => viewLastTen()}>Previous Page</Text>   |   <Text onPress={() => viewNextTen()}>Next Page</Text>

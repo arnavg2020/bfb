@@ -64,7 +64,7 @@ export default class Input extends Component {
           this.props.route.params.user.score_amount = parseInt(parseInt(this.props.route.params.user.score_amount) + parseInt(this.state.scores));
           this.props.route.params.user.outstanding_balance = parseInt(parseInt(this.props.route.params.user.outstanding_balance) + parseInt(parseInt(this.props.route.params.user.pledge_amount) * parseInt(this.state.scores)));
 
-          const amt = parseInt(parseInt(this.props.route.params.user.outstanding_balance) + parseInt(parseInt(this.state.scores) * parseInt(this.props.route.params.user.pledge_amount)));
+          const amt = this.props.route.params.user.outstanding_balance;
 
 
           Alert.alert(
