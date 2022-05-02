@@ -55,7 +55,7 @@ export default class Profile extends Component {
                             score_amount: this.props.route.params.score_amount,
                             outstanding_balance: this.props.route.params.outstanding_balance,
                             amount_paid_to_date: this.props.route.params.amount_paid_to_date,
-                            total_pledged: this.route.params.user.total_pledged
+                            total_pledged: this.props.route.params.user.total_pledged
                         })
                     }
                 ).then((response) => response.json()).then((json) => {
@@ -98,7 +98,7 @@ export default class Profile extends Component {
                             score_amount: this.props.route.params.score_amount,
                             outstanding_balance: this.props.route.params.outstanding_balance,
                             amount_paid_to_date: this.props.route.params.amount_paid_to_date,
-                            total_pledged: this.route.params.user.total_pledged
+                            total_pledged: this.props.route.params.user.total_pledged
                         })
                     }
                 ).then((response) => response.json()).then((json) => {

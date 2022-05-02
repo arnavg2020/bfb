@@ -52,7 +52,7 @@ export default class Pledge extends Component {
               score_amount: this.props.route.params.user.score_amount,
               outstanding_balance: this.props.route.params.user.outstanding_balance,
               amount_paid_to_date: this.props.route.params.user.amount_paid_to_date,
-              total_pledged: this.route.params.user.total_pledged
+              total_pledged: this.props.route.params.user.total_pledged
             })
           }
         ).then((response) => response.json()).then((json) => {

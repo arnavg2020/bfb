@@ -14,6 +14,7 @@ export default class Leaderboard extends Component {
       isLoading: true,
       tableHeaders: ['NAME', 'PLEDGE TYPE', 'TOTAL'],
       scores: [],
+      initialScores: [],
       hasRendered: false,
       currentIndex: 0,
       totalPledged: 0
@@ -38,6 +39,7 @@ export default class Leaderboard extends Component {
         }
       });
       this.state.scores.sort((a, b) => b[2] - a[2]);
+      this.state.initialScores = this.state.scores;
       fetch('https://birdies-for-books.herokuapp.com/users/total-pledged',
         {
           method: 'GET',
@@ -80,6 +82,35 @@ export default class Leaderboard extends Component {
       }
     }
 
+    filter = (type) => {
+      switch (type) {
+        case 1:
+          this.setState({
+            scores: this.state.initialScores
+          });
+          return;
+        case 2:
+          this.setState({
+            scores: this.state.initialScores.filter((item) => item[1] == 'Birdie')
+          });
+          console.log(this.state.scores);
+          return;
+        case 3:
+          this.setState({
+            scores: this.state.initialScores.filter((item) => item[1] == "Par")
+          });
+          console.log(this.state.scores);
+          console.log(this.state.scores);
+          return;
+        case 4:
+          this.setState({
+            scores: this.state.initialScores.filter((item) => item[1] == 'Bogey')
+          });
+          console.log(this.state.scores);
+          return;
+      }
+    }
+
     const goToProfile = () => {
       this.props.navigation.navigate('Profile', { user: this.props.route.params.user })
     }
@@ -100,24 +131,24 @@ export default class Leaderboard extends Component {
       <View style={styles.container}>
         <ImageBackground source={require('bfb/assets/backgroundplain.jpg')} resizeMode="cover" style={styles.image}>
           <View style={styles.shadow}>
+          <Image
+              style={styles.bottomBanner}
+              source={require('bfb/assets/birdies-for-books-only-green-logo.png')}
+            />
             <Text style={styles.headerText}>LEADERBOARD</Text>
             <Text style={styles.totalPledgedText}>
-              Birdies for Books golfers have pledged ${this.state.totalPledged} so far this season!
+              Birdies for Books golfers have pledged <Text style={{'color': 'white'}}>${this.state.totalPledged}</Text> so far this season!
             </Text>
             <Table style={styles.borderTop}>
               <Row data={this.state.tableHeaders} style={styles.HeadStyle} textStyle={styles.HeadText} />
-              <Rows data={this.state.scores.length > 7 ? this.state.scores.slice(this.state.currentIndex, this.state.currentIndex + 5) : this.state.scores} textStyle={styles.TableText} style={styles.rowStyle} />
+              <Rows data={this.state.scores.length > 5 ? this.state.scores.slice(this.state.currentIndex, (this.state.scores.length > this.state.currentIndex + 5 ? this.state.currentIndex + 5 : this.state.scores[this.state.scores.length - 1])) : this.state.scores} textStyle={styles.TableText} style={styles.rowStyle} />
             </Table>
-            <Button
-              color="white"
-              title="Previous Page"
-              onPress={() => viewLastTen()}
-            />
-            <Button
-              color="white"
-              title="Next Page"
-              onPress={() => viewNextTen()}
-            />
+            <Text style={styles.textButtonStyle}>
+              View:  <Text onPress={() => filter(1)}>All</Text>  |  <Text onPress={() => filter(2)}>Birdies</Text>  |  <Text onPress={() => filter(3)}>Pars</Text>  |  <Text onPress={() => filter(4)}>Bogies</Text>
+            </Text>
+            <Text style={styles.textButtonStyle}>
+              <Text onPress={() => viewLastTen()}>Previous Page</Text>   |   <Text onPress={() => viewNextTen()}>Next Page</Text>
+            </Text>
             <Button
               color="#9cbe52"
               title="Record My Activity"
@@ -127,10 +158,6 @@ export default class Leaderboard extends Component {
               color="#9cbe52"
               title="View My Profile"
               onPress={() => goToProfile()}
-            />
-            <Image
-              style={styles.bottomBanner}
-              source={require('bfb/assets/birdies-for-books-only-green-logo.png')}
             />
           </View>
         </ImageBackground>
@@ -158,12 +185,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center'
   },
+  textButtonStyle: {
+    color: 'white',
+    fontSize: 20,
+    textAlign: 'center',
+    marginTop: '3%',
+    marginBottom: '3%'
+  },
   bottomBanner: {
     resizeMode: 'contain',
     height: 80,
     width: '50%',
     marginLeft: '25%',
-    marginBottom: '0%'
+    marginTop: '10%'
   },
   shadow: {
     backgroundColor: 'rgba(5,71,88,0.8)',
@@ -195,7 +229,7 @@ const styles = StyleSheet.create({
     width: '80%',
     textAlign: 'center',
     marginLeft: '10%',
-    marginTop: '20%'
+    marginTop: '5%'
   },
   HeadText: {
     width: '95%',
