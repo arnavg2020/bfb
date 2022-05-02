@@ -53,14 +53,14 @@ export default class Input extends Component {
               score_amount: (parseInt(parseInt(this.props.route.params.user.score_amount) + parseInt(this.state.scores))),
               outstanding_balance: (parseInt(parseInt(this.props.route.params.user.outstanding_balance) + (parseInt(this.state.scores) * parseInt(this.props.route.params.user.pledge_amount)))),
               amount_paid_to_date: this.props.route.params.user.amount_paid_to_date,
-              total_pledged: this.props.route.params.user.total_pledged
+              total_pledged: (parseInt((parseInt(this.props.route.params.user.total_pledged) + parseInt(parseInt(this.props.route.params.user.pledge_amount) * parseInt(this.state.scores)))))
             })
           }
         ).then((response) => response.json()).then((json) => {
           this.setState({
             isLoading: false,
           });
-
+          this.props.route.params.user.total_pledged = (parseInt((parseInt(this.props.route.params.user.total_pledged) + parseInt(parseInt(this.props.route.params.user.pledge_amount) * parseInt(this.state.scores)))))
           this.props.route.params.user.score_amount = parseInt(parseInt(this.props.route.params.user.score_amount) + parseInt(this.state.scores));
           this.props.route.params.user.outstanding_balance = parseInt(parseInt(this.props.route.params.user.outstanding_balance) + parseInt(parseInt(this.props.route.params.user.pledge_amount) * parseInt(this.state.scores)));
 
