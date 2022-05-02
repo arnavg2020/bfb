@@ -131,23 +131,23 @@ export default class Leaderboard extends Component {
       <View style={styles.container}>
         <ImageBackground source={require('bfb/assets/backgroundplain.jpg')} resizeMode="cover" style={styles.image}>
           <View style={styles.shadow}>
-          <Image
+            <Image
               style={styles.bottomBanner}
               source={require('bfb/assets/birdies-for-books-only-green-logo.png')}
             />
             <Text style={styles.headerText}>LEADERBOARD</Text>
             <Text style={styles.totalPledgedText}>
-              Birdies for Books golfers have pledged <Text style={{'color': 'white'}}>${this.state.totalPledged}</Text> so far this season!
+              Birdies for Books golfers have pledged <Text style={{ 'color': 'white' }}>${this.state.totalPledged}</Text> so far this season!
             </Text>
             <Table style={styles.borderTop}>
               <Row data={this.state.tableHeaders} style={styles.HeadStyle} textStyle={styles.HeadText} />
               <Rows data={this.state.scores.length > 5 ? this.state.scores.slice(this.state.currentIndex, (this.state.scores.length > this.state.currentIndex + 5 ? this.state.currentIndex + 5 : this.state.scores[this.state.scores.length - 1])) : this.state.scores} textStyle={styles.TableText} style={styles.rowStyle} />
             </Table>
             <Text style={styles.textButtonStyle}>
-              View:  <Text onPress={() => filter(1)}>All</Text>  |  <Text onPress={() => filter(2)}>Birdies</Text>  |  <Text onPress={() => filter(3)}>Pars</Text>  |  <Text onPress={() => filter(4)}>Bogies</Text>
+              <Text onPress={() => viewLastTen()}>Previous Page</Text>   |   <Text onPress={() => viewNextTen()}>Next Page</Text>
             </Text>
             <Text style={styles.textButtonStyle}>
-              <Text onPress={() => viewLastTen()}>Previous Page</Text>   |   <Text onPress={() => viewNextTen()}>Next Page</Text>
+              View:  <Text onPress={() => filter(1)}>All</Text>  |  <Text onPress={() => filter(2)}>Birdies</Text>  |  <Text onPress={() => filter(3)}>Pars</Text>  |  <Text onPress={() => filter(4)}>Bogies</Text>
             </Text>
             <Button
               color="#9cbe52"
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     flex: 1,
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   totalPledgedText: {
     width: '80%',
