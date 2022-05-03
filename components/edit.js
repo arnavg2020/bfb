@@ -1,6 +1,6 @@
 // components/dashboard.js
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TextInput, Button, Picker, Image, Linking, Alert, ImageBackground, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Button, Image, Alert, ImageBackground, ActivityIndicator } from 'react-native';
 import('@react-navigation/native').Route;
 
 

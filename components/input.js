@@ -1,7 +1,6 @@
 // components/dashboard.js
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TextInput, Linking, Button, Picker, Alert, Image, ImageBackground, ActivityIndicator } from 'react-native';
-import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
+import { StyleSheet, View, Text, TextInput, Linking, Button, Alert, Image, ImageBackground, ActivityIndicator } from 'react-native';
 
 export default class Input extends Component {
   constructor() {

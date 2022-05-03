@@ -1,6 +1,6 @@
 // components/login.js
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert, Span, ActivityIndicator, ImageBackground, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, ActivityIndicator, ImageBackground, Image } from 'react-native';
 import { Rows } from 'react-native-table-component';
 import { Row } from 'react-native-table-component';
 import { Table } from 'react-native-table-component';
