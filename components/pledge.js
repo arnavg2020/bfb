@@ -116,12 +116,12 @@ export default class Pledge extends Component {
               onChangeText={(val) => updateInputVal(val.replace(/\D/g, ''), 'pledgeAmount')}
             />
             <Button
-              color="#054758"
+              color="black"
               title="Submit"
               onPress={() => goToProfile()}
             />
             <Button
-              color="#054758"
+              color="black"
               title="View My Profile"
               onPress={() => returnToProfile()}
             />
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     marginTop: '10%'
   },
   topText: {
-    color: 'rgb(5,71,88)',
+    color: 'black',
     fontWeight: 'bold',
     width: '70%',
     marginLeft: '15%',

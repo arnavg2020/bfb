@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
   impactText: {
     width: '78%',
     marginLeft: '11%',
-    color: '#054758',
+    color: 'black',
     textAlign: 'center',
     fontWeight: 'bold',
     marginTop: '3%',

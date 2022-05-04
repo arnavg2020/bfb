@@ -51,7 +51,7 @@ export default class Profile extends Component {
               Thanks for playing, {this.props.route.params.user.name}!
             </Text>
             <Button
-              color="#054758"
+              color="black"
               title="LEARN ABOUT YOUR PLEDGE'S IMPACT >"
               onPress={() => goToInfoPage()}
             />
@@ -69,7 +69,7 @@ export default class Profile extends Component {
               <Text style={styles.textStyleTwo}>Total {this.props.route.params.user.pledge_score}s This Season | </Text>{this.props.route.params.user.score_amount}
             </Text>
             <Button
-              color="#054758"
+              color="black"
               title="Record My Activity"
               onPress={() => goToInputPage()}
             />
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     marginBottom: '10%',
     width: '90%',
     marginLeft: '5%',
-    marginTop: '60%'
+    marginTop: '50%'
   },
   preloader: {
     left: 0,

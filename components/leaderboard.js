@@ -1,6 +1,6 @@
 // components/login.js
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, ActivityIndicator, ImageBackground, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, ActivityIndicator, ImageBackground, Image, Alert, TouchableOpacity } from 'react-native';
 import { Rows } from 'react-native-table-component';
 import { Row } from 'react-native-table-component';
 import { Table } from 'react-native-table-component';
@@ -115,6 +115,10 @@ export default class Leaderboard extends Component {
       this.props.navigation.navigate('Profile', { user: this.props.route.params.user })
     }
 
+    const alert = () => {
+      Alert.alert('', 'Questions about Birdies for Books? Email harrison@reachoutandreadco.org.');
+    }
+
     const goToInputPage = () => {
       this.props.navigation.navigate('Input', { user: this.props.route.params.user })
     }
@@ -159,6 +163,13 @@ export default class Leaderboard extends Component {
               title="View My Profile"
               onPress={() => goToProfile()}
             />
+            <TouchableOpacity style={styles.helpContainer} onPress={() => alert()}> 
+              <Image
+                onPress={() => alert()}
+                style={styles.helpIcon}
+                source={require('bfb/assets/help-icon.png')}
+              />
+            </TouchableOpacity>
           </View>
         </ImageBackground>
       </View>
@@ -171,6 +182,22 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center"
+  },
+  helpContainer: {
+    position: 'absolute',
+    top: '90%',
+    bottom: '5%',
+    left: '82%',
+    right: '12%',
+    justifyContent: 'flex-end',
+    zIndex: 3,
+    elevation: 3
+  },
+  helpIcon: {
+    width: '150%',
+    height: '100%',
+    zIndex: 3,
+    elevation: 3
   },
   totalPledgedText: {
     width: '80%',
