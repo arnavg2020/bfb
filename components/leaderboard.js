@@ -195,9 +195,7 @@ const styles = StyleSheet.create({
   },
   helpIcon: {
     width: '150%',
-    height: '100%',
-    zIndex: 3,
-    elevation: 3
+    height: '100%'
   },
   totalPledgedText: {
     width: '80%',

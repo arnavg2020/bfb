@@ -125,11 +125,11 @@ export default class Pledge extends Component {
               title="View My Profile"
               onPress={() => returnToProfile()}
             />
-            <Image
+          </View>
+          <Image
               style={styles.bottomBanner}
               source={require('bfb/assets/bottomlogobg.png')}
-            />
-          </View>
+          />
         </ImageBackground>
       </View>
     );
@@ -175,13 +175,15 @@ const styles = StyleSheet.create({
     marginBottom: '5%',
     width: '90%',
     marginLeft: '5%',
-    marginTop: '20%'
+    marginTop: '50%'
   },
   bottomBanner: {
+    height: 150,
     resizeMode: 'contain',
-    height: 180,
     width: '100%',
-    marginBottom: '0%'
+    marginTop: '0%',
+    marginBottom: '24%',
+    backgroundColor: 'rgba(0,0,0,0.3)'
   },
   textStyle: {
     fontSize: 18,
