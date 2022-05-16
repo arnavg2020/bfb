@@ -1,6 +1,7 @@
 // components/signup.js
 import React, { Component } from 'react';
 import { StyleSheet, Image, ImageBackground, Text, View, TextInput, Button, Alert, ActivityIndicator } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native'
 import { User } from './login';
 
 export default class Signup extends Component {
@@ -120,59 +121,61 @@ export default class Signup extends Component {
       )
     }
     return (
-      <View style={styles.container}>
-        <ImageBackground source={{ uri: 'https://cdn.wallpapersafari.com/83/29/i30AGk.jpg' }} resizeMode="cover" style={styles.image}>
-          <View style={styles.shadow}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <ImageBackground source={{ uri: 'https://cdn.wallpapersafari.com/83/29/i30AGk.jpg' }} resizeMode="cover" style={styles.image}>
+            <View style={styles.shadow}>
+              <Image
+                style={styles.banner}
+                source={{ uri: 'https://reachoutandreadco.org/wp-content/uploads/2021/04/birdies-for-books-reach-out-and-read-colorado-01-2048x525.png' }}
+              />
+              <TextInput
+
+                style={styles.inputStyleFirst}
+                placeholder="Name"
+                value={this.state.displayName}
+                onChangeText={(val) => updateInputVal(val, 'displayName')}
+              />
+              <TextInput
+
+                style={styles.inputStyle}
+                placeholder="Email"
+                value={this.state.email}
+                onChangeText={(val) => updateInputVal(val, 'email')}
+              />
+              <TextInput
+
+                style={styles.inputStyle}
+                placeholder="Password"
+                value={this.state.password}
+                onChangeText={(val) => updateInputVal(val, 'password')}
+                secureTextEntry={true}
+              />
+              <TextInput
+
+                style={styles.inputStyle}
+                placeholder="Phone Number"
+                value={this.state.phoneNumber}
+                onChangeText={(val) => updateInputVal(val.replace(/\D/g, ''), 'phoneNumber')}
+              />
+              <Button
+                color="white"
+                title="Sign Up"
+                onPress={() => registerUser()}
+              />
+              <Text
+                style={styles.loginText}
+                onPress={() => this.props.navigation.navigate('Login')}>
+                Already Registered? Click here to login
+              </Text>
+            </View>
             <Image
-              style={styles.banner}
-              source={{ uri: 'https://reachoutandreadco.org/wp-content/uploads/2021/04/birdies-for-books-reach-out-and-read-colorado-01-2048x525.png' }}
+              style={styles.capTechBanner}
+              source={require('bfb/assets/loginbg.png')}
             />
-            <TextInput
-
-              style={styles.inputStyleFirst}
-              placeholder="Name"
-              value={this.state.displayName}
-              onChangeText={(val) => updateInputVal(val, 'displayName')}
-            />
-            <TextInput
-
-              style={styles.inputStyle}
-              placeholder="Email"
-              value={this.state.email}
-              onChangeText={(val) => updateInputVal(val, 'email')}
-            />
-            <TextInput
-
-              style={styles.inputStyle}
-              placeholder="Password"
-              value={this.state.password}
-              onChangeText={(val) => updateInputVal(val, 'password')}
-              secureTextEntry={true}
-            />
-            <TextInput
-
-              style={styles.inputStyle}
-              placeholder="Phone Number"
-              value={this.state.phoneNumber}
-              onChangeText={(val) => updateInputVal(val.replace(/\D/g, ''), 'phoneNumber')}
-            />
-            <Button
-              color="white"
-              title="Sign Up"
-              onPress={() => registerUser()}
-            />
-            <Text
-              style={styles.loginText}
-              onPress={() => this.props.navigation.navigate('Login')}>
-              Already Registered? Click here to login
-            </Text>
-          </View>
-          <Image
-            style={styles.capTechBanner}
-            source={require('bfb/assets/loginbg.png')}
-          />
-        </ImageBackground>
-      </View>
+          </ImageBackground>
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }

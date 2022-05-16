@@ -1,6 +1,7 @@
 // components/dashboard.js
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TextInput, Button, Picker, Alert, ImageBackground, ActivityIndicator, Image } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native'
 export default class Pledge extends Component {
 
   constructor() {
@@ -80,58 +81,60 @@ export default class Pledge extends Component {
       )
     }
     return (
-      <View style={styles.container}>
-        <ImageBackground source={require('bfb/assets/Golf-green-bkgd-01.png')} resizeMode="cover" style={styles.image}>
-          <View style={styles.shadow}>
-            <Text style={styles.headerText}>
-              Hello, {this.props.route.params.user.name}
-            </Text>
-            <Text style={styles.topText}>
-              Pledge a dollar amount of your choice to be donated to Reach Out and Read Colorado for each Birdie, Par or Bogey that you score during the 2022 golf season.
-            </Text>
-            <Text style={styles.textStyle}>
-              I'd like to pledge for my…
-            </Text>
-            {/* <View style={styles.pickerContainer}> */}
-            <Picker
-              style={styles.pickerStyle}
-              itemStyle={{ color: 'white', fontSize: 17, height: 90 }}
-              onValueChange={(val) => updateInputVal(val, 'pledgeType')}
-              selectedValue={this.state.pledgeType || "Birdie"}
-            >
-              <Picker.Item label={"Birdies"} value={"Birdie"} />
-              <Picker.Item label={"Pars"} value={"Par"} />
-              <Picker.Item label={"Bogeys"} value={"Bogey"} />
-            </Picker>
-            {/* </View> */}
-            <Text style={styles.textStyleTwo}>
-              I'll pledge...
-            </Text>
-            <TextInput
-              keyboardType={"number-pad"}
-              placeholderTextColor="white"
-              style={styles.inputStyle}
-              placeholder="Dollar Amount Per ($)"
-              value={this.state.pledgeAmount.toString() != 0 ? this.state.pledgeAmount.toString() : null}
-              onChangeText={(val) => updateInputVal(val.replace(/\D/g, ''), 'pledgeAmount')}
-            />
-            <Button
-              color="black"
-              title="Submit"
-              onPress={() => goToProfile()}
-            />
-            <Button
-              color="black"
-              title="View My Profile"
-              onPress={() => returnToProfile()}
-            />
-          </View>
-          <Image
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <ImageBackground source={require('bfb/assets/Golf-green-bkgd-01.png')} resizeMode="cover" style={styles.image}>
+            <View style={styles.shadow}>
+              <Text style={styles.headerText}>
+                Hello, {this.props.route.params.user.name}
+              </Text>
+              <Text style={styles.topText}>
+                Pledge a dollar amount of your choice to be donated to Reach Out and Read Colorado for each Birdie, Par or Bogey that you score during the 2022 golf season.
+              </Text>
+              <Text style={styles.textStyle}>
+                I'd like to pledge for my…
+              </Text>
+              {/* <View style={styles.pickerContainer}> */}
+              <Picker
+                style={styles.pickerStyle}
+                itemStyle={{ color: 'white', fontSize: 17, height: 90 }}
+                onValueChange={(val) => updateInputVal(val, 'pledgeType')}
+                selectedValue={this.state.pledgeType || "Birdie"}
+              >
+                <Picker.Item label={"Birdies"} value={"Birdie"} />
+                <Picker.Item label={"Pars"} value={"Par"} />
+                <Picker.Item label={"Bogeys"} value={"Bogey"} />
+              </Picker>
+              {/* </View> */}
+              <Text style={styles.textStyleTwo}>
+                I'll pledge...
+              </Text>
+              <TextInput
+                keyboardType={"number-pad"}
+                placeholderTextColor="white"
+                style={styles.inputStyle}
+                placeholder="Dollar Amount Per ($)"
+                value={this.state.pledgeAmount.toString() != 0 ? this.state.pledgeAmount.toString() : null}
+                onChangeText={(val) => updateInputVal(val.replace(/\D/g, ''), 'pledgeAmount')}
+              />
+              <Button
+                color="black"
+                title="Submit"
+                onPress={() => goToProfile()}
+              />
+              <Button
+                color="black"
+                title="View My Profile"
+                onPress={() => returnToProfile()}
+              />
+            </View>
+            <Image
               style={styles.bottomBanner}
               source={require('bfb/assets/bottomlogobg.png')}
-          />
-        </ImageBackground>
-      </View>
+            />
+          </ImageBackground>
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }

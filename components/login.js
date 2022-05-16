@@ -1,6 +1,7 @@
 // components/login.js
 import React, { Component } from 'react';
 import { StyleSheet, Image, ImageBackground, Text, View, TextInput, Button, Alert, ActivityIndicator } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native'
 
 
 export class User {
@@ -112,46 +113,48 @@ export default class Login extends Component {
       )
     }
     return (
-      <View style={styles.container}>
-        <ImageBackground source={{ uri: 'https://cdn.wallpapersafari.com/83/29/i30AGk.jpg' }} resizeMode="cover" style={styles.image}>
-          <View style={styles.shadow}>
-            {/* <View style={styles.contentContainer}> */}
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <ImageBackground source={{ uri: 'https://cdn.wallpapersafari.com/83/29/i30AGk.jpg' }} resizeMode="cover" style={styles.image}>
+            <View style={styles.shadow}>
+              {/* <View style={styles.contentContainer}> */}
+              <Image
+                style={styles.banner}
+                source={{ uri: 'https://reachoutandreadco.org/wp-content/uploads/2021/04/birdies-for-books-reach-out-and-read-colorado-01-2048x525.png' }}
+              />
+              <Text style={styles.topText}>Support early literacy every time you golf. It’s that easy.</Text>
+              <TextInput
+                style={styles.inputStyle}
+                placeholder="Email"
+                value={this.state.email}
+                onChangeText={(val) => updateInputVal(val, 'email')}
+              />
+              <TextInput
+                style={styles.inputStyle}
+                placeholder="Password"
+                value={this.state.password}
+                onChangeText={(val) => updateInputVal(val, 'password')}
+                maxLength={15}
+                secureTextEntry={true}
+              />
+              <Button
+                color="white"
+                title="Login"
+                onPress={() => userLogin()}
+              />
+              <Text
+                style={styles.loginTextButton}
+                onPress={() => this.props.navigation.navigate('Signup')}>
+                Don't have an account? Click here to sign up.
+              </Text>
+            </View>
             <Image
-              style={styles.banner}
-              source={{ uri: 'https://reachoutandreadco.org/wp-content/uploads/2021/04/birdies-for-books-reach-out-and-read-colorado-01-2048x525.png' }}
+              style={styles.capTechBanner}
+              source={require('bfb/assets/loginbg.png')}
             />
-            <Text style={styles.topText}>Support early literacy every time you golf. It’s that easy.</Text>
-            <TextInput
-              style={styles.inputStyle}
-              placeholder="Email"
-              value={this.state.email}
-              onChangeText={(val) => updateInputVal(val, 'email')}
-            />
-            <TextInput
-              style={styles.inputStyle}
-              placeholder="Password"
-              value={this.state.password}
-              onChangeText={(val) => updateInputVal(val, 'password')}
-              maxLength={15}
-              secureTextEntry={true}
-            />
-            <Button
-              color="white"
-              title="Login"
-              onPress={() => userLogin()}
-            />
-            <Text
-              style={styles.loginTextButton}
-              onPress={() => this.props.navigation.navigate('Signup')}>
-              Don't have an account? Click here to sign up.
-            </Text>
-          </View>
-          <Image
-            style={styles.capTechBanner}
-            source={require('bfb/assets/loginbg.png')}
-          />
-        </ImageBackground>
-      </View>
+          </ImageBackground>
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }

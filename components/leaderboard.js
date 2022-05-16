@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Button, ActivityIndicator, ImageBackground, Ima
 import { Rows } from 'react-native-table-component';
 import { Row } from 'react-native-table-component';
 import { Table } from 'react-native-table-component';
+import {Keyboard, TouchableWithoutFeedback} from 'react-native'
 
 export default class Leaderboard extends Component {
 
@@ -132,7 +133,8 @@ export default class Leaderboard extends Component {
       )
     }
     return (
-      <View style={styles.container}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+              <View style={styles.container}>
         <ImageBackground source={require('bfb/assets/backgroundplain.jpg')} resizeMode="cover" style={styles.image}>
           <View style={styles.shadow}>
             <Image
@@ -151,7 +153,7 @@ export default class Leaderboard extends Component {
               <Text onPress={() => viewLastTen()}>Previous Page</Text>   |   <Text onPress={() => viewNextTen()}>Next Page</Text>
             </Text>
             <Text style={styles.textButtonStyle}>
-              View:  <Text onPress={() => filter(1)}>All</Text>  |  <Text onPress={() => filter(2)}>Birdies</Text>  |  <Text onPress={() => filter(3)}>Pars</Text>  |  <Text onPress={() => filter(4)}>Bogies</Text>
+              View:  <Text onPress={() => filter(1)}>All</Text>  |  <Text onPress={() => filter(2)}>Birdies</Text>  |  <Text onPress={() => filter(3)}>Pars</Text>  |  <Text onPress={() => filter(4)}>Bogeys</Text>
             </Text>
             <Button
               color="#9cbe52"
@@ -173,6 +175,7 @@ export default class Leaderboard extends Component {
           </View>
         </ImageBackground>
       </View>
+      </TouchableWithoutFeedback>
     );
   }
 }

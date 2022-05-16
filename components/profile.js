@@ -1,6 +1,7 @@
 // components/dashboard.js
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Button, Image, Linking, ImageBackground, ActivityIndicator } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native'
 import('@react-navigation/native').Route;
 
 
@@ -44,55 +45,57 @@ export default class Profile extends Component {
       )
     }
     return (
-      <View style={styles.container}>
-        <ImageBackground source={require('bfb/assets/Golf-green-bkgd-01.png')} resizeMode="cover" style={styles.image}>
-          <View style={styles.shadow}>
-            <Text style={styles.headerText}>
-              Thanks for playing, {this.props.route.params.user.name}!
-            </Text>
-            <Button
-              color="black"
-              title="LEARN ABOUT YOUR PLEDGE'S IMPACT >"
-              onPress={() => goToInfoPage()}
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <ImageBackground source={require('bfb/assets/Golf-green-bkgd-01.png')} resizeMode="cover" style={styles.image}>
+            <View style={styles.shadow}>
+              <Text style={styles.headerText}>
+                Thanks for playing, {this.props.route.params.user.name}!
+              </Text>
+              <Button
+                color="black"
+                title="LEARN ABOUT YOUR PLEDGE'S IMPACT >"
+                onPress={() => goToInfoPage()}
+              />
+              <Text style={styles.buttonStyleTwo}></Text>
+              <Text style={styles.textStyle}>
+                <Text style={styles.textStyleTwo}>Email | </Text>{this.props.route.params.user.email}
+              </Text>
+              <Text style={styles.textStyle}>
+                <Text style={styles.textStyleTwo}>Pledge Type | </Text>{this.props.route.params.user.pledge_score}s
+              </Text>
+              <Text style={styles.textStyle}>
+                <Text style={styles.textStyleTwo}>Pledge Amount | </Text>${this.props.route.params.user.pledge_amount}.00
+              </Text>
+              <Text style={[styles.textStyle, styles.bottomText]}>
+                <Text style={styles.textStyleTwo}>Total {this.props.route.params.user.pledge_score}s This Season | </Text>{this.props.route.params.user.score_amount}
+              </Text>
+              <Button
+                color="black"
+                title="Record My Activity"
+                onPress={() => goToInputPage()}
+              />
+
+              <Text style={styles.buttonStyle}>
+              </Text>
+              <Button
+                color="white"
+                title="Edit My Profile"
+                onPress={() => goToEditProfile()}
+              />
+              <Button
+                color="white"
+                title="Edit My Pledge Information"
+                onPress={() => goToPledgePage()}
+              />
+            </View>
+            <Image
+              style={styles.capTechBanner}
+              source={require('bfb/assets/bottomlogobg.png')}
             />
-            <Text style={styles.buttonStyleTwo}></Text>
-            <Text style={styles.textStyle}>
-              <Text style={styles.textStyleTwo}>Email | </Text>{this.props.route.params.user.email}
-            </Text>
-            <Text style={styles.textStyle}>
-              <Text style={styles.textStyleTwo}>Pledge Type | </Text>{this.props.route.params.user.pledge_score}s
-            </Text>
-            <Text style={styles.textStyle}>
-              <Text style={styles.textStyleTwo}>Pledge Amount | </Text>${this.props.route.params.user.pledge_amount}.00
-            </Text>
-            <Text style={[styles.textStyle, styles.bottomText]}>
-              <Text style={styles.textStyleTwo}>Total {this.props.route.params.user.pledge_score}s This Season | </Text>{this.props.route.params.user.score_amount}
-            </Text>
-            <Button
-              color="black"
-              title="Record My Activity"
-              onPress={() => goToInputPage()}
-            />
-            
-            <Text style = {styles.buttonStyle}>
-          </Text>
-            <Button
-              color="white"
-              title="Edit My Profile"
-              onPress={() => goToEditProfile()}
-            />
-            <Button
-              color="white"
-              title="Edit My Pledge Information"
-              onPress={() => goToPledgePage()}
-            />
-          </View>
-          <Image
-            style={styles.capTechBanner}
-            source={require('bfb/assets/bottomlogobg.png')}
-          />
-        </ImageBackground>
-      </View>
+          </ImageBackground>
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }

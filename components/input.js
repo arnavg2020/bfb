@@ -1,6 +1,7 @@
 // components/dashboard.js
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TextInput, Linking, Button, Alert, Image, ImageBackground, ActivityIndicator } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native'
 
 export default class Input extends Component {
   constructor() {
@@ -65,6 +66,7 @@ export default class Input extends Component {
 
           const amt = this.props.route.params.user.outstanding_balance;
 
+          updateInputVal('0', 'scores');
 
           Alert.alert(
             ("Thanks!"),
@@ -127,48 +129,50 @@ export default class Input extends Component {
       )
     }
     return (
-      <View style={styles.container}>
-        <ImageBackground source={require('bfb/assets/Golf-green-bkgd-01.png')} resizeMode="cover" style={styles.image}>
-          <View style={styles.shadow}>
-            <Text style={[styles.textStyle, styles.headerText]}>
-              Hello, {this.props.route.params.user.name}
-            </Text>
-            <Text style={styles.textStyle}>
-              How many {this.props.route.params.user.pledge_score}s do you want to record?
-            </Text>
-            <TextInput
-              style={styles.inputStyle}
-              placeholder="Amount"
-              value={this.state.scores}
-              onChangeText={(val) => updateInputVal(val.replace(/\D/g, ''), 'scores')}
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <ImageBackground source={require('bfb/assets/Golf-green-bkgd-01.png')} resizeMode="cover" style={styles.image}>
+            <View style={styles.shadow}>
+              <Text style={[styles.textStyle, styles.headerText]}>
+                Hello, {this.props.route.params.user.name}
+              </Text>
+              <Text style={styles.textStyle}>
+                How many {this.props.route.params.user.pledge_score}s do you want to record?
+              </Text>
+              <TextInput
+                style={styles.inputStyle}
+                placeholder="Amount"
+                value={this.state.scores}
+                onChangeText={(val) => updateInputVal(val.replace(/\D/g, ''), 'scores')}
+              />
+              <Button
+                color="white"
+                title="Submit"
+                onPress={() => updateScores()}
+              />
+              <Text style={styles.impactText}>
+                Each time you track a Birdie, Par or Bogey, you’re “teeing kids up” for a lifetime of success through books and early literacy guidance!
+              </Text>
+              <Button
+                color="white"
+                title="View My Profile"
+                onPress={() => goToProfile()}
+              />
+              <Text style={styles.buttonStyleThree}>
+              </Text>
+              <Button
+                color="white"
+                title="View Leaderboard"
+                onPress={() => goToLeaderboard()}
+              />
+            </View>
+            <Image
+              style={styles.capTechBanner}
+              source={require('bfb/assets/bottomlogobg.png')}
             />
-            <Button
-              color="white"
-              title="Submit"
-              onPress={() => updateScores()}
-            />
-            <Text style={styles.impactText}>
-              Each time you track a Birdie, Par or Bogey, you’re “teeing kids up” for a lifetime of success through books and early literacy guidance!
-            </Text>
-            <Button
-              color="white"
-              title="View My Profile"
-              onPress={() => goToProfile()}
-            />
-            <Text style={styles.buttonStyleThree}>
-            </Text>
-            <Button
-              color="white"
-              title="View Leaderboard"
-              onPress={() => goToLeaderboard()}
-            />
-          </View>
-          <Image
-            style={styles.capTechBanner}
-            source={require('bfb/assets/bottomlogobg.png')}
-          />
-        </ImageBackground>
-      </View>
+          </ImageBackground>
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }

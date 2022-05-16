@@ -1,6 +1,7 @@
 // components/dashboard.js
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TextInput, Button, Image, Alert, ImageBackground, ActivityIndicator } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native'
 import('@react-navigation/native').Route;
 
 
@@ -124,61 +125,63 @@ export default class Profile extends Component {
             )
         }
         return (
-            <View style={styles.container}>
-                <ImageBackground source={require('bfb/assets/Golf-green-bkgd-01.png')} resizeMode="cover" style={styles.image}>
-                    <View style={styles.shadow}>
-                        <Text style={styles.headerText}>
-                            Edit My Profile
-                        </Text>
-                        <Text style={styles.buttonStyleTwo}></Text>
-                        <Text style={styles.textStyle}>
-                            Want to update your email address?
-                        </Text>
-                        <TextInput
-                            placeholderTextColor="white"
-                            style={styles.inputStyle}
-                            placeholder="New Email Address"
-                            value={this.state.email}
-                            onChangeText={(val) => updateInputVal(val, 'email')}
-                        />
-                        <Button
-                            color="white"
-                            title="Update Email Address"
-                            onPress={() => updateEmailAddress()}
-                        />
-                                                <Text style={styles.buttonStyle}>
-                        </Text>
-                        <Text style={styles.textStyle}>
-                            Want to update your password?
-                        </Text>
-                        <TextInput
-                            placeholderTextColor="white"
-                            style={styles.inputStyle}
-                            placeholder="New Password"
-                            value={this.state.password}
-                            onChangeText={(val) => updateInputVal(val, 'password')}
-                            secureTextEntry={true}
-                        />
-                        <Button
-                            color="white"
-                            title="Update Password"
-                            onPress={() => updatePassword()}
-                        />
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <View style={styles.container}>
+                    <ImageBackground source={require('bfb/assets/Golf-green-bkgd-01.png')} resizeMode="cover" style={styles.image}>
+                        <View style={styles.shadow}>
+                            <Text style={styles.headerText}>
+                                Edit My Profile
+                            </Text>
+                            <Text style={styles.buttonStyleTwo}></Text>
+                            <Text style={styles.textStyle}>
+                                Want to update your email address?
+                            </Text>
+                            <TextInput
+                                placeholderTextColor="white"
+                                style={styles.inputStyle}
+                                placeholder="New Email Address"
+                                value={this.state.email}
+                                onChangeText={(val) => updateInputVal(val, 'email')}
+                            />
+                            <Button
+                                color="white"
+                                title="Update Email Address"
+                                onPress={() => updateEmailAddress()}
+                            />
+                            <Text style={styles.buttonStyle}>
+                            </Text>
+                            <Text style={styles.textStyle}>
+                                Want to update your password?
+                            </Text>
+                            <TextInput
+                                placeholderTextColor="white"
+                                style={styles.inputStyle}
+                                placeholder="New Password"
+                                value={this.state.password}
+                                onChangeText={(val) => updateInputVal(val, 'password')}
+                                secureTextEntry={true}
+                            />
+                            <Button
+                                color="white"
+                                title="Update Password"
+                                onPress={() => updatePassword()}
+                            />
 
-                        <Text style={styles.buttonStyle}>
-                        </Text>
-                        <Button
-                            color="white"
-                            title="Return To Profile"
-                            onPress={() => goToProfile()}
+                            <Text style={styles.buttonStyle}>
+                            </Text>
+                            <Button
+                                color="white"
+                                title="Return To Profile"
+                                onPress={() => goToProfile()}
+                            />
+                        </View>
+                        <Image
+                            style={styles.capTechBanner}
+                            source={require('bfb/assets/bottomlogobg.png')}
                         />
-                    </View>
-                    <Image
-                        style={styles.capTechBanner}
-                        source={require('bfb/assets/bottomlogobg.png')}
-                    />
-                </ImageBackground>
-            </View>
+                    </ImageBackground>
+                </View>
+            </TouchableWithoutFeedback>
         );
     }
 }
